@@ -1,0 +1,67 @@
+0	ambienttemperature
+0.47	aterrain
+0.35	bterrain
+0	windvelocity
+45	bldgOrientation
+0	windDirect
+8	buildingHeight
+2	bldgtype
+8	floorwidth
+8	floorlength
+4	floorheight
+3.75	floortoceilingheight
+2	floornumber bldgtype 0 1
+2	cvsections bldgtype 2
+20	cvinternalopeningsize bldgtype 2
+2.00	cvinternalopeningheight bldgtype 2
+2	sidewindowsize bldgtype 2
+1	fanCheck bldgtype 2
+0	fana2 bldgtype 2
+0	fana1 bldgtype 2
+0	fana0 bldgtype 2
+0	fanb2 bldgtype 2
+0	fanb1 bldgtype 2
+0	fanD bldgtype 2
+0	gamma bldgtype 2
+24	Tfan bldgtype 2
+0.1	omegaFan bldgtype 2
+0	ACCheck bldgtype 2
+40	T_AC bldgtype 2
+0.1	omega_AC bldgtype 2
+3	COP_AC bldgtype 2
+1	controlCheck bldgtype 2
+0	doubleOpeningsCheck
+0	deltaH
+0	loweropeningarea
+2	upperopeningarea
+2	sideglazingarea
+2.25	windowheightE
+2.25	windowheightW
+22	initialzonetemperature
+20	heatsource
+0.1	persondensity
+19	occupancyScheduleON
+9	occupancyScheduleOFF
+0.2	offpeakloadfraction
+1	TMassCheck
+0.23	TMassThick
+0.9	TMassArea
+1	TMassK
+1	transimu
+11	frommonth
+11	tomonth
+1	dailySimulations
+1	adiabaticWalls
+4	hfloor
+3.75	hceiling
+1	NCoolCheck
+19	NightCoolingOnHour
+23	NightCoolingOffHour
+1	closewindowOACheck
+10	OAlimit
+0	closewindowIACheck
+18	IALimit
+0	CdInlet
+0	CdInternal
+0	CdShaft
+0	CdExhaust
