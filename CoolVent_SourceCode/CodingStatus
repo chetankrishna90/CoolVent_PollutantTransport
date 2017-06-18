@@ -1,0 +1,115 @@
+This is my first attempt to keep a record of the changes I make to the files, in 
+case I mess up, of for the next grad student victim of this code.
+
+2008 04 04--Magically, from nothing working, I've managed to validate the two 
+            simplest cases: single-sided and crozz vent (2 sections, no heat 
+            loads). It was validated with both a Maple code I wrote, and CONTAM.
+          --I changed the formula to obtain density, from 
+            1.205*(1.0+(20.0-this.air_temp)/(273.0+(20.0+this.air_temp)/2.0))
+            to 
+            287.05/101325.0*(this.air_temp+273.15)
+            I've compared them both, and they differ little. Only that the 
+            second formula involves less calculations --at least in Maple--, and
+            comes directly from the eq of state for ideal gases (as opposed to 
+            the original one, which is an extrapolation. R(dry air) = 287.05 J/KgK
+            1 atm = 101325 Pa, T[Kelvin] = temp+273.15
+          --For the moment single sided vent has all the heatloads in Zone1, and
+            none in Zone2.
+
+2008 04 05--Corrected the good old error with cross vent + thermal mass. It was 
+            in input read, while definind the TMasses. Now all simulation works :)
+
+2008 04 06--I removed the Math.random term from CV's initial temperature and all
+            (TM, Transient) works. :)
+          --It turns out that the simulation time is shorter than my thermal 
+            mass' time constant, and therefore I'm getting and effect of time in
+            steady state simulations. I don't know how to modify the simulation
+            time. 
+               I tried changing the temp_error threshold from 1e-7 to 1e-9
+                and it didn't work.
+               I tried changing the stady state controller from 8000 to 80000
+                and in worked!!! It is a longer calculation, but for a controller
+                of 34,000 I reach steady state.
+
+2008 04 13--While preparing for the Energy Showcase I realized that nightcooling 
+            wasn't working anymore. I have no clue why. When I first implemented
+            it, the code would go through certain calflowrate function , and now 
+            it goes through another. So I fixed it now, but I need to be alert at
+            why this change in functions happened. To fix it, I aded a *openingfrac
+`           at the end of the florate calculation line, in the Calculation file.
+
+2008 04 14--I've changed the values for discharge coefficient, to account for flow
+            through doors. For that I had to add the location "Door" to the flowpath
+            class. 
+
+2008 07 16--A few weeks ago I worked on implementing radiation back into the code 
+            (on a much simpler way than Jinchao), simply by separating the heat
+            gains in radiative and convective. Now heat loads are calculated 
+            separately, and the idea is that solar heat gains heat up the walls
+            as opposed of heating up the air, as it was initially set up. 
+            I've ran a few tests, using only radiative and only convective, and 
+            there are differences, I can't really tell if it's working 100% though.
+
+            I found out that the code was going through some lines (in the
+            calAir_temp_trapezoidal section of Define_network) that were supposed
+            to be activated only when on radiant mode. I've removed those lines
+            but this means that the code was going though them all the time in the
+            past. Not good. I have not figured out a way of accurately comparing 
+            results from one run to the other.
+
+2008 08 27--I've just added what I call radiative heat to the model, in the correct
+            line this time (define_network, cal_temp_trapezoidal). And it works!!
+            I've also figured out how to read the TemperatureOutput.txt file :)
+            First columns correspond to temperature of each zone, next columns 
+            correspond to each thermal mass element.
+
+2008 08 28--I'm playing around with the Occupational fraction being radiated versus
+            convected. I've left it all convected until I really understand whether
+            the usual 70W per person is only convective heat load, or corresponds 
+            to all. The default coefficient for convection (0.2) just seems too low.
+            I've modified the characteristics of TMasses, so that only the upper
+            layer (ie floor) receives the solar heat.
+
+2008 08 29--Ok, so I changed the radiative coeff to 0.5, following HoF 05 30.14, I've
+            tested it and it's working. I've also modified the code so that when 
+            thermal mass is zero all heat wi convective --none radiative.
+            For this, I had to go through the code adding TMassCheck all over the 
+            place. Not easy!!! So I think for now CoolVent is up and running. Ready
+            for implementations but good with respect to debugging.
+
+2008 12 04--CoolVent now interploates wind velocity as well. All this under the effort 
+            to understand where strange stepchanges on airflow output come from... 
+            I have not found the answer to such mystery yet.
+
+2008 12 06--Window transmittance: 
+            Uncoated double galzing CLR CLR T = 0.6. HoF Chap 30.
+
+2009 05 18--Back to the hedious bug of Singular matrix in Cross Ventilation.
+            Somehow, CoolVent only runs for certain combinations of cities and
+            building heights (bizarre).
+            I've changed the function Initializeflowrate (in DefinNetwork) by 
+            simply initializing all flowrates with the value of 1e-10.
+
+---         Code changed to read epw files
+
+20090726  --I think I finally solved the cross ventilation problem. The model
+            used to calculate the wind pressure coefficient gave wrong results.
+            It would give negative Cp for opposing walls, leading to zero flow.
+            This Cp was highly dependent on the building dimensions and wind direction, 
+            hence the weird errors I was getting.
+            I have implemented a new model, by Swami and Chandra, which has been
+            widely validated.
+            So far, it now seems it's be working fine.
+          --Marcel has been working on the interface. It is the interface now that reads 
+            the weather data and processes it. This end of CoolVent only reads
+            it off the Outdoor.txt.
+            Also, we removed the disNW and disWE lines from the Input.txt file. 
+            Now I calculate it directly in InputRead.
+20100331 -- Changed the terms "floor/atrium length" to "floor/atrium width".
+20100916 -- Added 180 to WindDirData so that WindDir in this code means where wind
+            is GOING TO and not COMING FROM (way too confusing, but it's the way
+            tmy3 data specifies it)
+20101006 -- In Calculation, line ~38 where flowrate is calculated deltaP was being
+            multiplied by density as opposed to diving. I changed that.
+
+
