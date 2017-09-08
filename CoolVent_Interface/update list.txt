@@ -1,0 +1,15 @@
+CoolVent Updates
+
+- The user can now browse his own epw files to run a transient simulation.
+- Choosing the city and month will prompt charts to appear showing 
+temperature, humidity, wind direction, and wind speed throughout the day.
+- The user can now save and load input data for the program.
+- All input data is now in 4 tabs instead of 2 forms
+- Input options will now show helper popup text when moused over.
+- Buttons for the first form (including changing units and showing
+visualizations, have been moved to a toolstrip at the top of the form.
+- When entering building dimensions, the picture of the biuilding will
+scale according to the new parameters.
+- The visualization can now be paused and started again.
+- Snapshots of the visualization are chosen from a dropdown menu with times
+instead of from numeric updowns.

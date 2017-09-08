@@ -1,0 +1,16 @@
+Required Change 
+1. Display the zone number and temperature.
+*2. "Report" includes "city name" and "month" information.
+*3. Make an increament of the pausing time between each frames when the display interval grows larger.
+4. Round the airflow cfm into 100cfm or 10cfm.
+*5. Thermal mass training period.
+
+Optional Change
+0. Enlarge the "cfm" and "digital clock" font.
+1. Report airflow unit (in kg/s)
+2. Report (in the file) the incoming and outgoing airflow seperately.
+*3. Correct the airflow display position (especially the top one, center it).
+4. Correct the right pointing arrow (not exactly the same as the left pointing one).
+5. Make the position of different edit/label boxes correct.
+6. Check the "Lock scale" problem.
+7. Make the graph better. 

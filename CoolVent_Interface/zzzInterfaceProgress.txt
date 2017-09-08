@@ -1,0 +1,27 @@
+20100224
+MAMB Moved wind parameters - FUNCTIONAL
+MAMB Copied orientation pictures groupbox boxes to steady -- FUNCTIONAL
+MAMB Moved "Simulation type" box to Main Inputs -- FUNCTIONAL
+
+20100310 
+MAMB fixed:
+Transient orientation pics: 
+SS  + Chimney - only SE pic exists
+CV + Central - all but S pic exist
+fixed steady state pics.
+
+20100311 
+MAMB fixed Puerto Rico bug. The wind rose was not allowing for the option of "no occurrences" happening in a certain wind direction, and was dividing by zero.
+MAMB Weather feedback was not correct, I fixed it.
+
+20100315 MAMB fixed wind directions on wind rose.
+MAMB added steady state wind rose.
+MAMB results: 	disabled animate and play/pause button in steady
+		transient goes to animate directly
+		steady goes to the final line (I think) of results directly
+MAMB tabs: steady and transient are "disabled" when they can't be used, and a message pops up when they try to access the worng tab
+
+20100316 MAMB New images! 
+
+
+

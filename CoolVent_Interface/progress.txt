@@ -1,0 +1,4 @@
+Changes
+
+Remaining bugs
+- when a weather file is uploaded, the summary writes the file name as the city name

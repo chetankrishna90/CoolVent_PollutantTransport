@@ -1,0 +1,2282 @@
+// Fig. 16.20: DrawPolygons.cs
+// Demonstrating polygons.
+
+using System;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Data;
+using System.IO;
+using System.Diagnostics;
+
+namespace CoolVent
+{
+	/// <summary>
+	/// Summary description for Form1.
+	/// </summary>
+	public class PolygonForm : System.Windows.Forms.Form
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private 
+			System.ComponentModel.Container components = null;
+
+		// contains list of polygon vertices
+		private ArrayList points = new ArrayList();
+
+		private ArrayList rects = new ArrayList ();
+
+		// initialize default pen and brush
+		Pen pen = new Pen( Color.Red);
+
+		private bool performedcalulation = false;
+
+		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.PictureBox pictureBox2;
+		private System.Windows.Forms.PictureBox pictureBox3;
+		private System.Windows.Forms.TextBox floorlength;
+		private System.Windows.Forms.TextBox atriumlength;
+		private System.Windows.Forms.TextBox topwindowsize;
+		private System.Windows.Forms.TextBox floornumber;
+		private System.Windows.Forms.TextBox floorheight;
+		private System.Windows.Forms.TextBox roofheight;
+		private System.Windows.Forms.TextBox croofheight;
+		private System.Windows.Forms.TextBox ctopwindowsize;
+		private System.Windows.Forms.TextBox cfloorheight;
+		private System.Windows.Forms.TextBox csidewindowsize;
+		private System.Windows.Forms.TextBox cfloornumber;
+		private System.Windows.Forms.TextBox catriumlength;
+		private System.Windows.Forms.TextBox cfloorlength;
+		private System.Windows.Forms.TextBox cvfloorlength;
+		private System.Windows.Forms.TextBox cvsections;
+		private System.Windows.Forms.TextBox sidewindowsize;
+		private System.Windows.Forms.TextBox cvfloorwidth;
+		private System.Windows.Forms.TextBox cvfloorheight;
+		private System.Windows.Forms.TextBox cvinternalwindowsize;
+		private System.Windows.Forms.TextBox cfloorwidth;
+		private System.Windows.Forms.TextBox floorwidth;
+		private System.Windows.Forms.TextBox cvsidewindowsize;
+		private System.Windows.Forms.RadioButton CrossVentilation;
+		private System.Windows.Forms.RadioButton ChimneyType;
+		private System.Windows.Forms.RadioButton LutonType;
+		private System.Windows.Forms.Button Back;
+		private System.Windows.Forms.Button CancelAction;
+		private System.Windows.Forms.Label label005;
+		private System.Windows.Forms.Label label004;
+		private System.Windows.Forms.Label label003;
+		private System.Windows.Forms.Label label001;
+		private System.Windows.Forms.Label label002;
+		private System.Windows.Forms.Label label006;
+		private System.Windows.Forms.Label label008;
+		private System.Windows.Forms.Label label007;
+		private System.Windows.Forms.Label label021;
+		private System.Windows.Forms.Label label023;
+		private System.Windows.Forms.Label label022;
+		private System.Windows.Forms.Label label024;
+		private System.Windows.Forms.Label label025;
+		private System.Windows.Forms.Label label028;
+		private System.Windows.Forms.Label label027;
+		private System.Windows.Forms.Label label026;
+		private System.Windows.Forms.Label label045;
+		private System.Windows.Forms.Label label044;
+		private System.Windows.Forms.Label label041;
+		private System.Windows.Forms.Label label042;
+		private System.Windows.Forms.Label label043;
+		private System.Windows.Forms.Button Visualization;
+		private System.Windows.Forms.Label Thickness;
+		private System.Windows.Forms.Label cm;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.TextBox TMassArea;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.ComboBox TMassMaterials;
+		private System.Windows.Forms.TextBox TMassThick;
+		private System.Windows.Forms.CheckBox TMassCheck;
+		private System.Windows.Forms.Button SideWindowSpace;
+		private System.Windows.Forms.Button TopWindowSpaceBut;
+		private System.Windows.Forms.Button PerformCalBut;
+		private System.Windows.Forms.Label label046;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.ComboBox FloorTypeCom;
+		private System.Windows.Forms.ComboBox CeilingTypeCom;
+		private System.Windows.Forms.Button ReportRsltBut;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.CheckBox closewindowOAChe;
+		private System.Windows.Forms.TextBox OALimitTxt;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.CheckBox closewindowIAChe;
+		private System.Windows.Forms.TextBox IALimitTxt;
+		private System.Windows.Forms.RadioButton SingleSided;
+		private System.Windows.Forms.PictureBox pictureBox4;
+		private System.Windows.Forms.TextBox ssfloorheight;
+		private System.Windows.Forms.Label label061;
+		private System.Windows.Forms.TextBox ssfloorlength;
+		private System.Windows.Forms.Label label062;
+		private System.Windows.Forms.Label label063;
+		private System.Windows.Forms.TextBox ssfloorwidth;
+		private System.Windows.Forms.Label label064;
+		//Pen pen = new Pen( Color.DarkBlue );
+
+		SolidBrush brush = new SolidBrush( Color.DarkBlue );
+
+		public PolygonForm()
+		{
+			//
+			// Required for Windows Form Designer support
+			//
+			InitializeComponent();
+		}
+
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		protected override void Dispose( bool disposing )
+		{
+			if( disposing )
+			{
+				if (components != null) 
+				{
+					components.Dispose();
+				}
+			}
+			base.Dispose( disposing );
+		}
+
+		#region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(PolygonForm));
+			this.CrossVentilation = new System.Windows.Forms.RadioButton();
+			this.LutonType = new System.Windows.Forms.RadioButton();
+			this.ChimneyType = new System.Windows.Forms.RadioButton();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.floorlength = new System.Windows.Forms.TextBox();
+			this.atriumlength = new System.Windows.Forms.TextBox();
+			this.topwindowsize = new System.Windows.Forms.TextBox();
+			this.floornumber = new System.Windows.Forms.TextBox();
+			this.sidewindowsize = new System.Windows.Forms.TextBox();
+			this.floorheight = new System.Windows.Forms.TextBox();
+			this.label008 = new System.Windows.Forms.Label();
+			this.label007 = new System.Windows.Forms.Label();
+			this.label005 = new System.Windows.Forms.Label();
+			this.label004 = new System.Windows.Forms.Label();
+			this.label003 = new System.Windows.Forms.Label();
+			this.roofheight = new System.Windows.Forms.TextBox();
+			this.label001 = new System.Windows.Forms.Label();
+			this.label021 = new System.Windows.Forms.Label();
+			this.label024 = new System.Windows.Forms.Label();
+			this.croofheight = new System.Windows.Forms.TextBox();
+			this.label023 = new System.Windows.Forms.Label();
+			this.label025 = new System.Windows.Forms.Label();
+			this.label028 = new System.Windows.Forms.Label();
+			this.label027 = new System.Windows.Forms.Label();
+			this.cfloorheight = new System.Windows.Forms.TextBox();
+			this.csidewindowsize = new System.Windows.Forms.TextBox();
+			this.cfloornumber = new System.Windows.Forms.TextBox();
+			this.ctopwindowsize = new System.Windows.Forms.TextBox();
+			this.catriumlength = new System.Windows.Forms.TextBox();
+			this.cfloorlength = new System.Windows.Forms.TextBox();
+			this.pictureBox2 = new System.Windows.Forms.PictureBox();
+			this.pictureBox3 = new System.Windows.Forms.PictureBox();
+			this.cvfloorwidth = new System.Windows.Forms.TextBox();
+			this.cvsidewindowsize = new System.Windows.Forms.TextBox();
+			this.cvinternalwindowsize = new System.Windows.Forms.TextBox();
+			this.label045 = new System.Windows.Forms.Label();
+			this.label044 = new System.Windows.Forms.Label();
+			this.cvfloorlength = new System.Windows.Forms.TextBox();
+			this.cvsections = new System.Windows.Forms.TextBox();
+			this.cvfloorheight = new System.Windows.Forms.TextBox();
+			this.PerformCalBut = new System.Windows.Forms.Button();
+			this.cfloorwidth = new System.Windows.Forms.TextBox();
+			this.label022 = new System.Windows.Forms.Label();
+			this.label002 = new System.Windows.Forms.Label();
+			this.floorwidth = new System.Windows.Forms.TextBox();
+			this.Visualization = new System.Windows.Forms.Button();
+			this.Back = new System.Windows.Forms.Button();
+			this.CancelAction = new System.Windows.Forms.Button();
+			this.label006 = new System.Windows.Forms.Label();
+			this.label026 = new System.Windows.Forms.Label();
+			this.label041 = new System.Windows.Forms.Label();
+			this.label042 = new System.Windows.Forms.Label();
+			this.label043 = new System.Windows.Forms.Label();
+			this.Thickness = new System.Windows.Forms.Label();
+			this.TMassThick = new System.Windows.Forms.TextBox();
+			this.cm = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.TMassArea = new System.Windows.Forms.TextBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.TMassMaterials = new System.Windows.Forms.ComboBox();
+			this.TMassCheck = new System.Windows.Forms.CheckBox();
+			this.SideWindowSpace = new System.Windows.Forms.Button();
+			this.TopWindowSpaceBut = new System.Windows.Forms.Button();
+			this.label046 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.FloorTypeCom = new System.Windows.Forms.ComboBox();
+			this.CeilingTypeCom = new System.Windows.Forms.ComboBox();
+			this.label5 = new System.Windows.Forms.Label();
+			this.ReportRsltBut = new System.Windows.Forms.Button();
+			this.label6 = new System.Windows.Forms.Label();
+			this.closewindowOAChe = new System.Windows.Forms.CheckBox();
+			this.OALimitTxt = new System.Windows.Forms.TextBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
+			this.IALimitTxt = new System.Windows.Forms.TextBox();
+			this.closewindowIAChe = new System.Windows.Forms.CheckBox();
+			this.SingleSided = new System.Windows.Forms.RadioButton();
+			this.pictureBox4 = new System.Windows.Forms.PictureBox();
+			this.ssfloorheight = new System.Windows.Forms.TextBox();
+			this.label061 = new System.Windows.Forms.Label();
+			this.ssfloorlength = new System.Windows.Forms.TextBox();
+			this.label062 = new System.Windows.Forms.Label();
+			this.label063 = new System.Windows.Forms.Label();
+			this.ssfloorwidth = new System.Windows.Forms.TextBox();
+			this.label064 = new System.Windows.Forms.Label();
+			this.SuspendLayout();
+			// 
+			// CrossVentilation
+			// 
+			this.CrossVentilation.Location = new System.Drawing.Point(432, 14);
+			this.CrossVentilation.Name = "CrossVentilation";
+			this.CrossVentilation.Size = new System.Drawing.Size(113, 16);
+			this.CrossVentilation.TabIndex = 2;
+			this.CrossVentilation.Text = "Cross Ventilation";
+			this.CrossVentilation.CheckedChanged += new System.EventHandler(this.CrossVentilation_CheckedChanged);
+			// 
+			// LutonType
+			// 
+			this.LutonType.Location = new System.Drawing.Point(48, 14);
+			this.LutonType.Name = "LutonType";
+			this.LutonType.Size = new System.Drawing.Size(125, 16);
+			this.LutonType.TabIndex = 1;
+			this.LutonType.Text = "Central Atrium Type";
+			this.LutonType.CheckedChanged += new System.EventHandler(this.LutonType_CheckedChanged);
+			// 
+			// ChimneyType
+			// 
+			this.ChimneyType.Location = new System.Drawing.Point(256, 14);
+			this.ChimneyType.Name = "ChimneyType";
+			this.ChimneyType.Size = new System.Drawing.Size(96, 16);
+			this.ChimneyType.TabIndex = 0;
+			this.ChimneyType.Text = "Chimney Type";
+			this.ChimneyType.CheckedChanged += new System.EventHandler(this.ChimneyType_CheckedChanged);
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+			this.pictureBox1.Location = new System.Drawing.Point(8, 96);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(740, 283);
+			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.pictureBox1.TabIndex = 8;
+			this.pictureBox1.TabStop = false;
+			// 
+			// floorlength
+			// 
+			this.floorlength.Location = new System.Drawing.Point(192, 384);
+			this.floorlength.Name = "floorlength";
+			this.floorlength.Size = new System.Drawing.Size(33, 20);
+			this.floorlength.TabIndex = 9;
+			this.floorlength.Text = "10";
+			this.floorlength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// atriumlength
+			// 
+			this.atriumlength.Location = new System.Drawing.Point(368, 384);
+			this.atriumlength.Name = "atriumlength";
+			this.atriumlength.Size = new System.Drawing.Size(33, 20);
+			this.atriumlength.TabIndex = 10;
+			this.atriumlength.Text = "5";
+			this.atriumlength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// topwindowsize
+			// 
+			this.topwindowsize.Location = new System.Drawing.Point(352, 72);
+			this.topwindowsize.Name = "topwindowsize";
+			this.topwindowsize.Size = new System.Drawing.Size(33, 20);
+			this.topwindowsize.TabIndex = 11;
+			this.topwindowsize.Text = "1.5";
+			this.topwindowsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// floornumber
+			// 
+			this.floornumber.Location = new System.Drawing.Point(40, 272);
+			this.floornumber.Name = "floornumber";
+			this.floornumber.Size = new System.Drawing.Size(27, 20);
+			this.floornumber.TabIndex = 12;
+			this.floornumber.Text = "3";
+			this.floornumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// sidewindowsize
+			// 
+			this.sidewindowsize.Location = new System.Drawing.Point(688, 216);
+			this.sidewindowsize.Name = "sidewindowsize";
+			this.sidewindowsize.Size = new System.Drawing.Size(26, 20);
+			this.sidewindowsize.TabIndex = 13;
+			this.sidewindowsize.Text = "1.8";
+			this.sidewindowsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// floorheight
+			// 
+			this.floorheight.Location = new System.Drawing.Point(688, 328);
+			this.floorheight.Name = "floorheight";
+			this.floorheight.Size = new System.Drawing.Size(26, 20);
+			this.floorheight.TabIndex = 14;
+			this.floorheight.Text = "3";
+			this.floorheight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label008
+			// 
+			this.label008.Location = new System.Drawing.Point(400, 392);
+			this.label008.Name = "label008";
+			this.label008.Size = new System.Drawing.Size(13, 14);
+			this.label008.TabIndex = 16;
+			this.label008.Text = "m";
+			// 
+			// label007
+			// 
+			this.label007.Location = new System.Drawing.Point(224, 392);
+			this.label007.Name = "label007";
+			this.label007.Size = new System.Drawing.Size(14, 14);
+			this.label007.TabIndex = 17;
+			this.label007.Text = "m";
+			// 
+			// label005
+			// 
+			this.label005.Location = new System.Drawing.Point(712, 224);
+			this.label005.Name = "label005";
+			this.label005.Size = new System.Drawing.Size(27, 14);
+			this.label005.TabIndex = 18;
+			this.label005.Text = "m^2";
+			// 
+			// label004
+			// 
+			this.label004.BackColor = System.Drawing.Color.Transparent;
+			this.label004.Location = new System.Drawing.Point(568, 152);
+			this.label004.Name = "label004";
+			this.label004.Size = new System.Drawing.Size(13, 13);
+			this.label004.TabIndex = 19;
+			this.label004.Text = "m";
+			// 
+			// label003
+			// 
+			this.label003.Location = new System.Drawing.Point(208, 424);
+			this.label003.Name = "label003";
+			this.label003.Size = new System.Drawing.Size(14, 14);
+			this.label003.TabIndex = 21;
+			this.label003.Text = "m";
+			// 
+			// roofheight
+			// 
+			this.roofheight.Location = new System.Drawing.Point(544, 144);
+			this.roofheight.Name = "roofheight";
+			this.roofheight.Size = new System.Drawing.Size(27, 20);
+			this.roofheight.TabIndex = 20;
+			this.roofheight.Text = "3";
+			this.roofheight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label001
+			// 
+			this.label001.Location = new System.Drawing.Point(384, 80);
+			this.label001.Name = "label001";
+			this.label001.Size = new System.Drawing.Size(27, 14);
+			this.label001.TabIndex = 22;
+			this.label001.Text = "m^2";
+			// 
+			// label021
+			// 
+			this.label021.Location = new System.Drawing.Point(336, 80);
+			this.label021.Name = "label021";
+			this.label021.Size = new System.Drawing.Size(27, 14);
+			this.label021.TabIndex = 36;
+			this.label021.Text = "m^2";
+			// 
+			// label024
+			// 
+			this.label024.Location = new System.Drawing.Point(504, 152);
+			this.label024.Name = "label024";
+			this.label024.Size = new System.Drawing.Size(13, 13);
+			this.label024.TabIndex = 35;
+			this.label024.Text = "m";
+			// 
+			// croofheight
+			// 
+			this.croofheight.Location = new System.Drawing.Point(480, 144);
+			this.croofheight.Name = "croofheight";
+			this.croofheight.Size = new System.Drawing.Size(27, 20);
+			this.croofheight.TabIndex = 34;
+			this.croofheight.Text = "3";
+			this.croofheight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label023
+			// 
+			this.label023.Location = new System.Drawing.Point(208, 424);
+			this.label023.Name = "label023";
+			this.label023.Size = new System.Drawing.Size(14, 14);
+			this.label023.TabIndex = 33;
+			this.label023.Text = "m";
+			// 
+			// label025
+			// 
+			this.label025.Location = new System.Drawing.Point(648, 232);
+			this.label025.Name = "label025";
+			this.label025.Size = new System.Drawing.Size(27, 14);
+			this.label025.TabIndex = 32;
+			this.label025.Text = "m^2";
+			// 
+			// label028
+			// 
+			this.label028.Location = new System.Drawing.Point(493, 408);
+			this.label028.Name = "label028";
+			this.label028.Size = new System.Drawing.Size(14, 13);
+			this.label028.TabIndex = 31;
+			this.label028.Text = "m";
+			// 
+			// label027
+			// 
+			this.label027.Location = new System.Drawing.Point(340, 408);
+			this.label027.Name = "label027";
+			this.label027.Size = new System.Drawing.Size(13, 13);
+			this.label027.TabIndex = 30;
+			this.label027.Text = "m";
+			// 
+			// cfloorheight
+			// 
+			this.cfloorheight.Location = new System.Drawing.Point(624, 344);
+			this.cfloorheight.Name = "cfloorheight";
+			this.cfloorheight.Size = new System.Drawing.Size(27, 20);
+			this.cfloorheight.TabIndex = 29;
+			this.cfloorheight.Text = "3";
+			this.cfloorheight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// csidewindowsize
+			// 
+			this.csidewindowsize.Location = new System.Drawing.Point(624, 224);
+			this.csidewindowsize.Name = "csidewindowsize";
+			this.csidewindowsize.Size = new System.Drawing.Size(27, 20);
+			this.csidewindowsize.TabIndex = 28;
+			this.csidewindowsize.Text = "1.8";
+			this.csidewindowsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// cfloornumber
+			// 
+			this.cfloornumber.Location = new System.Drawing.Point(184, 264);
+			this.cfloornumber.Name = "cfloornumber";
+			this.cfloornumber.Size = new System.Drawing.Size(27, 20);
+			this.cfloornumber.TabIndex = 27;
+			this.cfloornumber.Text = "3";
+			this.cfloornumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// ctopwindowsize
+			// 
+			this.ctopwindowsize.Location = new System.Drawing.Point(300, 72);
+			this.ctopwindowsize.Name = "ctopwindowsize";
+			this.ctopwindowsize.Size = new System.Drawing.Size(33, 20);
+			this.ctopwindowsize.TabIndex = 26;
+			this.ctopwindowsize.Text = "1.5";
+			this.ctopwindowsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// catriumlength
+			// 
+			this.catriumlength.Location = new System.Drawing.Point(307, 400);
+			this.catriumlength.Name = "catriumlength";
+			this.catriumlength.Size = new System.Drawing.Size(33, 20);
+			this.catriumlength.TabIndex = 25;
+			this.catriumlength.Text = "5";
+			this.catriumlength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// cfloorlength
+			// 
+			this.cfloorlength.Location = new System.Drawing.Point(460, 400);
+			this.cfloorlength.Name = "cfloorlength";
+			this.cfloorlength.Size = new System.Drawing.Size(33, 20);
+			this.cfloorlength.TabIndex = 24;
+			this.cfloorlength.Text = "10";
+			this.cfloorlength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// pictureBox2
+			// 
+			this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+			this.pictureBox2.Location = new System.Drawing.Point(144, 97);
+			this.pictureBox2.Name = "pictureBox2";
+			this.pictureBox2.Size = new System.Drawing.Size(549, 295);
+			this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.pictureBox2.TabIndex = 23;
+			this.pictureBox2.TabStop = false;
+			// 
+			// pictureBox3
+			// 
+			this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+			this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+			this.pictureBox3.Location = new System.Drawing.Point(8, 96);
+			this.pictureBox3.Name = "pictureBox3";
+			this.pictureBox3.Size = new System.Drawing.Size(623, 281);
+			this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBox3.TabIndex = 37;
+			this.pictureBox3.TabStop = false;
+			// 
+			// cvfloorwidth
+			// 
+			this.cvfloorwidth.Location = new System.Drawing.Point(176, 416);
+			this.cvfloorwidth.Name = "cvfloorwidth";
+			this.cvfloorwidth.Size = new System.Drawing.Size(26, 20);
+			this.cvfloorwidth.TabIndex = 38;
+			this.cvfloorwidth.Text = "5";
+			this.cvfloorwidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// cvsidewindowsize
+			// 
+			this.cvsidewindowsize.Location = new System.Drawing.Point(573, 243);
+			this.cvsidewindowsize.Name = "cvsidewindowsize";
+			this.cvsidewindowsize.Size = new System.Drawing.Size(27, 20);
+			this.cvsidewindowsize.TabIndex = 39;
+			this.cvsidewindowsize.Text = "1.8";
+			this.cvsidewindowsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// cvinternalwindowsize
+			// 
+			this.cvinternalwindowsize.Location = new System.Drawing.Point(313, 222);
+			this.cvinternalwindowsize.Name = "cvinternalwindowsize";
+			this.cvinternalwindowsize.Size = new System.Drawing.Size(27, 20);
+			this.cvinternalwindowsize.TabIndex = 40;
+			this.cvinternalwindowsize.Text = "1.5";
+			this.cvinternalwindowsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label045
+			// 
+			this.label045.Location = new System.Drawing.Point(208, 424);
+			this.label045.Name = "label045";
+			this.label045.Size = new System.Drawing.Size(14, 14);
+			this.label045.TabIndex = 44;
+			this.label045.Text = "m";
+			// 
+			// label044
+			// 
+			this.label044.Location = new System.Drawing.Point(147, 354);
+			this.label044.Name = "label044";
+			this.label044.Size = new System.Drawing.Size(13, 13);
+			this.label044.TabIndex = 43;
+			this.label044.Text = "m";
+			// 
+			// cvfloorlength
+			// 
+			this.cvfloorlength.Location = new System.Drawing.Point(113, 347);
+			this.cvfloorlength.Name = "cvfloorlength";
+			this.cvfloorlength.Size = new System.Drawing.Size(34, 20);
+			this.cvfloorlength.TabIndex = 42;
+			this.cvfloorlength.Text = "5";
+			this.cvfloorlength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// cvsections
+			// 
+			this.cvsections.Location = new System.Drawing.Point(313, 347);
+			this.cvsections.Name = "cvsections";
+			this.cvsections.Size = new System.Drawing.Size(34, 20);
+			this.cvsections.TabIndex = 41;
+			this.cvsections.Text = "3";
+			this.cvsections.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// cvfloorheight
+			// 
+			this.cvfloorheight.Location = new System.Drawing.Point(20, 243);
+			this.cvfloorheight.Name = "cvfloorheight";
+			this.cvfloorheight.Size = new System.Drawing.Size(27, 20);
+			this.cvfloorheight.TabIndex = 45;
+			this.cvfloorheight.Text = "4";
+			this.cvfloorheight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// PerformCalBut
+			// 
+			this.PerformCalBut.Location = new System.Drawing.Point(220, 616);
+			this.PerformCalBut.Name = "PerformCalBut";
+			this.PerformCalBut.Size = new System.Drawing.Size(120, 20);
+			this.PerformCalBut.TabIndex = 48;
+			this.PerformCalBut.Text = "Perform Calculations";
+			this.PerformCalBut.Click += new System.EventHandler(this.PerformCalBut_Click);
+			// 
+			// cfloorwidth
+			// 
+			this.cfloorwidth.Location = new System.Drawing.Point(176, 416);
+			this.cfloorwidth.Name = "cfloorwidth";
+			this.cfloorwidth.Size = new System.Drawing.Size(26, 20);
+			this.cfloorwidth.TabIndex = 69;
+			this.cfloorwidth.Text = "20";
+			this.cfloorwidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label022
+			// 
+			this.label022.Location = new System.Drawing.Point(13, 424);
+			this.label022.Name = "label022";
+			this.label022.Size = new System.Drawing.Size(160, 16);
+			this.label022.TabIndex = 70;
+			this.label022.Text = "Length (Vertical to the Screen)";
+			// 
+			// label002
+			// 
+			this.label002.Location = new System.Drawing.Point(13, 424);
+			this.label002.Name = "label002";
+			this.label002.Size = new System.Drawing.Size(160, 16);
+			this.label002.TabIndex = 71;
+			this.label002.Text = "Length (Vertical to the Screen)";
+			// 
+			// floorwidth
+			// 
+			this.floorwidth.Location = new System.Drawing.Point(176, 416);
+			this.floorwidth.Name = "floorwidth";
+			this.floorwidth.Size = new System.Drawing.Size(26, 20);
+			this.floorwidth.TabIndex = 72;
+			this.floorwidth.Text = "20";
+			this.floorwidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// Visualization
+			// 
+			this.Visualization.Location = new System.Drawing.Point(367, 616);
+			this.Visualization.Name = "Visualization";
+			this.Visualization.Size = new System.Drawing.Size(120, 20);
+			this.Visualization.TabIndex = 73;
+			this.Visualization.Text = "Visualize Results";
+			this.Visualization.Click += new System.EventHandler(this.Visualization_Click);
+			// 
+			// Back
+			// 
+			this.Back.Location = new System.Drawing.Point(133, 616);
+			this.Back.Name = "Back";
+			this.Back.Size = new System.Drawing.Size(63, 20);
+			this.Back.TabIndex = 74;
+			this.Back.Text = "<<Back";
+			this.Back.Click += new System.EventHandler(this.Back_Click);
+			// 
+			// CancelAction
+			// 
+			this.CancelAction.Location = new System.Drawing.Point(513, 616);
+			this.CancelAction.Name = "CancelAction";
+			this.CancelAction.Size = new System.Drawing.Size(63, 20);
+			this.CancelAction.TabIndex = 75;
+			this.CancelAction.Text = "Cancel";
+			this.CancelAction.Click += new System.EventHandler(this.CancelAction_Click);
+			// 
+			// label006
+			// 
+			this.label006.Location = new System.Drawing.Point(712, 336);
+			this.label006.Name = "label006";
+			this.label006.Size = new System.Drawing.Size(16, 16);
+			this.label006.TabIndex = 77;
+			this.label006.Text = "m";
+			// 
+			// label026
+			// 
+			this.label026.Location = new System.Drawing.Point(648, 352);
+			this.label026.Name = "label026";
+			this.label026.Size = new System.Drawing.Size(13, 14);
+			this.label026.TabIndex = 78;
+			this.label026.Text = "m";
+			// 
+			// label041
+			// 
+			this.label041.Location = new System.Drawing.Point(340, 229);
+			this.label041.Name = "label041";
+			this.label041.Size = new System.Drawing.Size(27, 14);
+			this.label041.TabIndex = 79;
+			this.label041.Text = "m^2";
+			// 
+			// label042
+			// 
+			this.label042.Location = new System.Drawing.Point(600, 250);
+			this.label042.Name = "label042";
+			this.label042.Size = new System.Drawing.Size(27, 13);
+			this.label042.TabIndex = 80;
+			this.label042.Text = "m^2";
+			// 
+			// label043
+			// 
+			this.label043.Location = new System.Drawing.Point(47, 250);
+			this.label043.Name = "label043";
+			this.label043.Size = new System.Drawing.Size(13, 13);
+			this.label043.TabIndex = 81;
+			this.label043.Text = "m";
+			// 
+			// Thickness
+			// 
+			this.Thickness.Location = new System.Drawing.Point(80, 480);
+			this.Thickness.Name = "Thickness";
+			this.Thickness.Size = new System.Drawing.Size(60, 20);
+			this.Thickness.TabIndex = 83;
+			this.Thickness.Text = "Thickness";
+			// 
+			// TMassThick
+			// 
+			this.TMassThick.Location = new System.Drawing.Point(140, 472);
+			this.TMassThick.Name = "TMassThick";
+			this.TMassThick.Size = new System.Drawing.Size(33, 20);
+			this.TMassThick.TabIndex = 84;
+			this.TMassThick.Text = "10";
+			this.TMassThick.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// cm
+			// 
+			this.cm.Location = new System.Drawing.Point(173, 480);
+			this.cm.Name = "cm";
+			this.cm.Size = new System.Drawing.Size(20, 20);
+			this.cm.TabIndex = 85;
+			this.cm.Text = "cm";
+			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(347, 480);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(86, 20);
+			this.label1.TabIndex = 87;
+			this.label1.Text = "% of Floor Area";
+			// 
+			// label2
+			// 
+			this.label2.Location = new System.Drawing.Point(280, 480);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(40, 20);
+			this.label2.TabIndex = 86;
+			this.label2.Text = "Area";
+			// 
+			// TMassArea
+			// 
+			this.TMassArea.Location = new System.Drawing.Point(320, 472);
+			this.TMassArea.Name = "TMassArea";
+			this.TMassArea.Size = new System.Drawing.Size(27, 20);
+			this.TMassArea.TabIndex = 88;
+			this.TMassArea.Text = "90";
+			this.TMassArea.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label3
+			// 
+			this.label3.Location = new System.Drawing.Point(493, 480);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(54, 20);
+			this.label3.TabIndex = 89;
+			this.label3.Text = "Materials";
+			// 
+			// TMassMaterials
+			// 
+			this.TMassMaterials.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.TMassMaterials.Location = new System.Drawing.Point(547, 472);
+			this.TMassMaterials.Name = "TMassMaterials";
+			this.TMassMaterials.Size = new System.Drawing.Size(100, 21);
+			this.TMassMaterials.TabIndex = 90;
+			// 
+			// TMassCheck
+			// 
+			this.TMassCheck.Location = new System.Drawing.Point(13, 448);
+			this.TMassCheck.Name = "TMassCheck";
+			this.TMassCheck.Size = new System.Drawing.Size(134, 21);
+			this.TMassCheck.TabIndex = 91;
+			this.TMassCheck.Text = "Include Thermal Mass";
+			this.TMassCheck.CheckedChanged += new System.EventHandler(this.TMassCheck_CheckedChanged);
+			// 
+			// SideWindowSpace
+			// 
+			this.SideWindowSpace.Location = new System.Drawing.Point(688, 248);
+			this.SideWindowSpace.Name = "SideWindowSpace";
+			this.SideWindowSpace.Size = new System.Drawing.Size(60, 49);
+			this.SideWindowSpace.TabIndex = 92;
+			this.SideWindowSpace.Text = "Side Windows Spacing";
+			this.SideWindowSpace.Click += new System.EventHandler(this.SideWindowSpace_Click);
+			// 
+			// TopWindowSpaceBut
+			// 
+			this.TopWindowSpaceBut.Location = new System.Drawing.Point(312, 32);
+			this.TopWindowSpaceBut.Name = "TopWindowSpaceBut";
+			this.TopWindowSpaceBut.Size = new System.Drawing.Size(88, 34);
+			this.TopWindowSpaceBut.TabIndex = 93;
+			this.TopWindowSpaceBut.Text = "Top Windows Spacing";
+			this.TopWindowSpaceBut.Click += new System.EventHandler(this.TopWindowSpaceBut_Click);
+			// 
+			// label046
+			// 
+			this.label046.Location = new System.Drawing.Point(13, 424);
+			this.label046.Name = "label046";
+			this.label046.Size = new System.Drawing.Size(160, 16);
+			this.label046.TabIndex = 94;
+			this.label046.Text = "Length (Vertical to the Screen)";
+			// 
+			// label4
+			// 
+			this.label4.Location = new System.Drawing.Point(80, 512);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(60, 20);
+			this.label4.TabIndex = 95;
+			this.label4.Text = "Floor Type";
+			// 
+			// FloorTypeCom
+			// 
+			this.FloorTypeCom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.FloorTypeCom.Location = new System.Drawing.Point(147, 504);
+			this.FloorTypeCom.Name = "FloorTypeCom";
+			this.FloorTypeCom.Size = new System.Drawing.Size(100, 21);
+			this.FloorTypeCom.TabIndex = 96;
+			// 
+			// CeilingTypeCom
+			// 
+			this.CeilingTypeCom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.CeilingTypeCom.Location = new System.Drawing.Point(353, 504);
+			this.CeilingTypeCom.Name = "CeilingTypeCom";
+			this.CeilingTypeCom.Size = new System.Drawing.Size(101, 21);
+			this.CeilingTypeCom.TabIndex = 98;
+			// 
+			// label5
+			// 
+			this.label5.Location = new System.Drawing.Point(280, 512);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(73, 20);
+			this.label5.TabIndex = 97;
+			this.label5.Text = "Ceiling Type";
+			// 
+			// ReportRsltBut
+			// 
+			this.ReportRsltBut.Location = new System.Drawing.Point(593, 616);
+			this.ReportRsltBut.Name = "ReportRsltBut";
+			this.ReportRsltBut.Size = new System.Drawing.Size(107, 20);
+			this.ReportRsltBut.TabIndex = 99;
+			this.ReportRsltBut.Text = "Report Results";
+			this.ReportRsltBut.Visible = false;
+			this.ReportRsltBut.Click += new System.EventHandler(this.ReportRsltBut_Click);
+			// 
+			// label6
+			// 
+			this.label6.Location = new System.Drawing.Point(13, 544);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(160, 15);
+			this.label6.TabIndex = 100;
+			this.label6.Text = "Window Operation Strategies";
+			// 
+			// closewindowOAChe
+			// 
+			this.closewindowOAChe.Location = new System.Drawing.Point(13, 568);
+			this.closewindowOAChe.Name = "closewindowOAChe";
+			this.closewindowOAChe.Size = new System.Drawing.Size(323, 21);
+			this.closewindowOAChe.TabIndex = 101;
+			this.closewindowOAChe.Text = "Close Window when outdoor air temperature drops below";
+			this.closewindowOAChe.CheckedChanged += new System.EventHandler(this.closewindowOAChe_CheckedChanged);
+			// 
+			// OALimitTxt
+			// 
+			this.OALimitTxt.Location = new System.Drawing.Point(464, 568);
+			this.OALimitTxt.Name = "OALimitTxt";
+			this.OALimitTxt.Size = new System.Drawing.Size(33, 20);
+			this.OALimitTxt.TabIndex = 102;
+			this.OALimitTxt.Text = "12";
+			this.OALimitTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label7
+			// 
+			this.label7.Location = new System.Drawing.Point(504, 568);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(86, 20);
+			this.label7.TabIndex = 103;
+			this.label7.Text = "Degree Celsius.";
+			// 
+			// label8
+			// 
+			this.label8.Location = new System.Drawing.Point(504, 592);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(86, 19);
+			this.label8.TabIndex = 106;
+			this.label8.Text = "Degree Celsius.";
+			// 
+			// IALimitTxt
+			// 
+			this.IALimitTxt.Location = new System.Drawing.Point(464, 592);
+			this.IALimitTxt.Name = "IALimitTxt";
+			this.IALimitTxt.Size = new System.Drawing.Size(33, 20);
+			this.IALimitTxt.TabIndex = 105;
+			this.IALimitTxt.Text = "15";
+			this.IALimitTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// closewindowIAChe
+			// 
+			this.closewindowIAChe.Location = new System.Drawing.Point(13, 592);
+			this.closewindowIAChe.Name = "closewindowIAChe";
+			this.closewindowIAChe.Size = new System.Drawing.Size(443, 20);
+			this.closewindowIAChe.TabIndex = 104;
+			this.closewindowIAChe.Text = "Close Window and turn on heating when any internal zone temperature drops below";
+			this.closewindowIAChe.CheckedChanged += new System.EventHandler(this.closewindowIAChe_CheckedChanged);
+			// 
+			// SingleSided
+			// 
+			this.SingleSided.Location = new System.Drawing.Point(616, 14);
+			this.SingleSided.Name = "SingleSided";
+			this.SingleSided.Size = new System.Drawing.Size(104, 16);
+			this.SingleSided.TabIndex = 107;
+			this.SingleSided.Text = "Single Sided";
+			this.SingleSided.CheckedChanged += new System.EventHandler(this.SingleSided_CheckedChanged);
+			// 
+			// pictureBox4
+			// 
+			this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+			this.pictureBox4.Location = new System.Drawing.Point(256, 96);
+			this.pictureBox4.Name = "pictureBox4";
+			this.pictureBox4.Size = new System.Drawing.Size(368, 296);
+			this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBox4.TabIndex = 108;
+			this.pictureBox4.TabStop = false;
+			// 
+			// ssfloorheight
+			// 
+			this.ssfloorheight.Location = new System.Drawing.Point(280, 240);
+			this.ssfloorheight.Name = "ssfloorheight";
+			this.ssfloorheight.Size = new System.Drawing.Size(27, 20);
+			this.ssfloorheight.TabIndex = 109;
+			this.ssfloorheight.Text = "4";
+			this.ssfloorheight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label061
+			// 
+			this.label061.Location = new System.Drawing.Point(312, 248);
+			this.label061.Name = "label061";
+			this.label061.Size = new System.Drawing.Size(13, 13);
+			this.label061.TabIndex = 110;
+			this.label061.Text = "m";
+			// 
+			// ssfloorlength
+			// 
+			this.ssfloorlength.Location = new System.Drawing.Point(456, 368);
+			this.ssfloorlength.Name = "ssfloorlength";
+			this.ssfloorlength.Size = new System.Drawing.Size(34, 20);
+			this.ssfloorlength.TabIndex = 111;
+			this.ssfloorlength.Text = "5";
+			this.ssfloorlength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label062
+			// 
+			this.label062.Location = new System.Drawing.Point(496, 376);
+			this.label062.Name = "label062";
+			this.label062.Size = new System.Drawing.Size(13, 13);
+			this.label062.TabIndex = 112;
+			this.label062.Text = "m";
+			// 
+			// label063
+			// 
+			this.label063.Location = new System.Drawing.Point(16, 424);
+			this.label063.Name = "label063";
+			this.label063.Size = new System.Drawing.Size(160, 16);
+			this.label063.TabIndex = 113;
+			this.label063.Text = "Length (Vertical to the Screen)";
+			// 
+			// ssfloorwidth
+			// 
+			this.ssfloorwidth.Location = new System.Drawing.Point(176, 416);
+			this.ssfloorwidth.Name = "ssfloorwidth";
+			this.ssfloorwidth.Size = new System.Drawing.Size(26, 20);
+			this.ssfloorwidth.TabIndex = 114;
+			this.ssfloorwidth.Text = "5";
+			this.ssfloorwidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label064
+			// 
+			this.label064.Location = new System.Drawing.Point(208, 424);
+			this.label064.Name = "label064";
+			this.label064.Size = new System.Drawing.Size(14, 14);
+			this.label064.TabIndex = 115;
+			this.label064.Text = "m";
+			// 
+			// PolygonForm
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.ClientSize = new System.Drawing.Size(770, 645);
+			this.Controls.Add(this.label064);
+			this.Controls.Add(this.ssfloorwidth);
+			this.Controls.Add(this.ssfloorlength);
+			this.Controls.Add(this.ssfloorheight);
+			this.Controls.Add(this.IALimitTxt);
+			this.Controls.Add(this.OALimitTxt);
+			this.Controls.Add(this.cvfloorwidth);
+			this.Controls.Add(this.topwindowsize);
+			this.Controls.Add(this.roofheight);
+			this.Controls.Add(this.TMassArea);
+			this.Controls.Add(this.TMassThick);
+			this.Controls.Add(this.cfloorwidth);
+			this.Controls.Add(this.cvfloorheight);
+			this.Controls.Add(this.cvfloorlength);
+			this.Controls.Add(this.cvsections);
+			this.Controls.Add(this.cvinternalwindowsize);
+			this.Controls.Add(this.cvsidewindowsize);
+			this.Controls.Add(this.croofheight);
+			this.Controls.Add(this.cfloorheight);
+			this.Controls.Add(this.csidewindowsize);
+			this.Controls.Add(this.cfloornumber);
+			this.Controls.Add(this.ctopwindowsize);
+			this.Controls.Add(this.catriumlength);
+			this.Controls.Add(this.cfloorlength);
+			this.Controls.Add(this.floorheight);
+			this.Controls.Add(this.sidewindowsize);
+			this.Controls.Add(this.floornumber);
+			this.Controls.Add(this.atriumlength);
+			this.Controls.Add(this.floorlength);
+			this.Controls.Add(this.floorwidth);
+			this.Controls.Add(this.label063);
+			this.Controls.Add(this.label062);
+			this.Controls.Add(this.label061);
+			this.Controls.Add(this.pictureBox4);
+			this.Controls.Add(this.SingleSided);
+			this.Controls.Add(this.label8);
+			this.Controls.Add(this.closewindowIAChe);
+			this.Controls.Add(this.label7);
+			this.Controls.Add(this.closewindowOAChe);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.ReportRsltBut);
+			this.Controls.Add(this.CeilingTypeCom);
+			this.Controls.Add(this.label5);
+			this.Controls.Add(this.FloorTypeCom);
+			this.Controls.Add(this.label4);
+			this.Controls.Add(this.label046);
+			this.Controls.Add(this.label021);
+			this.Controls.Add(this.label024);
+			this.Controls.Add(this.label001);
+			this.Controls.Add(this.label004);
+			this.Controls.Add(this.TopWindowSpaceBut);
+			this.Controls.Add(this.SideWindowSpace);
+			this.Controls.Add(this.TMassCheck);
+			this.Controls.Add(this.TMassMaterials);
+			this.Controls.Add(this.label3);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.cm);
+			this.Controls.Add(this.Thickness);
+			this.Controls.Add(this.label043);
+			this.Controls.Add(this.label042);
+			this.Controls.Add(this.label041);
+			this.Controls.Add(this.label026);
+			this.Controls.Add(this.label006);
+			this.Controls.Add(this.CancelAction);
+			this.Controls.Add(this.Back);
+			this.Controls.Add(this.Visualization);
+			this.Controls.Add(this.PerformCalBut);
+			this.Controls.Add(this.label045);
+			this.Controls.Add(this.label044);
+			this.Controls.Add(this.label023);
+			this.Controls.Add(this.label025);
+			this.Controls.Add(this.label028);
+			this.Controls.Add(this.label027);
+			this.Controls.Add(this.label003);
+			this.Controls.Add(this.label005);
+			this.Controls.Add(this.label007);
+			this.Controls.Add(this.label008);
+			this.Controls.Add(this.LutonType);
+			this.Controls.Add(this.ChimneyType);
+			this.Controls.Add(this.CrossVentilation);
+			this.Controls.Add(this.label022);
+			this.Controls.Add(this.label002);
+			this.Controls.Add(this.pictureBox2);
+			this.Controls.Add(this.pictureBox3);
+			this.Controls.Add(this.pictureBox1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Name = "PolygonForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "Generic Geometries";
+			this.Load += new System.EventHandler(this.PolygonForm_Load);
+			this.ResumeLayout(false);
+
+		}
+		#endregion
+
+		/// <summary>
+		/// The main entry point for the application.
+		/// </summary>
+		[STAThread]
+		static void Main() 
+		{
+			//Jinchao Yuan added here an section to input the initial parameters
+			StartProg StartProgform = new StartProg();
+			//visualform.ShowDialog ();
+			StartProgform.ShowDialog ();
+
+			Application.Run( new PolygonForm() );
+		} // end method drawPanel_MouseDown
+
+		private void loadLutonTypeFrame()
+		{
+			//this.ClientSize = new System.Drawing.Size(848, 400);
+			//this.MaximizeBox = false;
+			
+			//this.ChimneyType.Location = new System.Drawing.Point(40, 360);
+			//this.CrossVentilation.Location = new System.Drawing.Point(40, 380);
+
+			//luton type
+
+			//Luton type 0 data 
+			floornumber.Show();
+			floorlength.Show();
+			atriumlength.Show();
+			floorwidth.Show();
+			floorheight.Show();
+			roofheight.Show();
+			sidewindowsize.Show(); //m2
+			topwindowsize.Show();
+
+			pictureBox1.Show();
+			label001.Show();
+			label002.Show();
+			label003.Show();
+			label004.Show();
+			label005.Show();
+			label006.Show();
+			label007.Show();
+			label008.Show();
+
+			//add on 06/25/2006
+			TopWindowSpaceBut.Show();
+			LutonType.Enabled = true;
+
+			//Hide the following controls
+			
+			////////////////////Chimney type 1 data
+			//ChimneyType.Hide ();
+			
+			cfloornumber.Hide();
+			cfloorlength.Hide();
+			catriumlength.Hide();
+			cfloorwidth.Hide();
+			cfloorheight.Hide();
+			croofheight.Hide();
+			csidewindowsize.Hide(); //m2
+			ctopwindowsize.Hide(); //m2	
+			
+			pictureBox2.Hide();
+			label021.Hide();
+			label022.Hide();
+			label023.Hide();
+			label024.Hide();
+			label025.Hide();
+			label026.Hide();
+			label027.Hide();
+			label028.Hide();
+			//////////////////////
+
+			//also hide the following data
+			///////////////////////////Cross Ventilation type 2 data
+			//CrossVentilation.Hide ();
+
+			cvsections.Hide();
+			cvfloorlength.Hide();
+			cvfloorwidth.Hide();
+			cvfloorheight.Hide();
+			cvsidewindowsize.Hide();
+			cvinternalwindowsize.Hide();
+
+			pictureBox3.Hide();
+			label041.Hide();
+			label042.Hide();
+			label043.Hide();
+			label044.Hide();
+			label045.Hide();
+			label046.Hide();
+			//////////////////////////
+			///
+			//07/26/2006
+			ssfloorheight.Hide ();
+			ssfloorlength.Hide ();
+			ssfloorwidth.Hide ();
+			
+			pictureBox4.Hide ();
+			label061.Hide ();
+			label062.Hide ();
+			label063.Hide ();
+			label064.Hide ();
+			
+			//added on 06/25/2006
+			ChimneyType.Enabled = false;
+			CrossVentilation.Enabled = false;
+			SingleSided.Enabled = false;
+		}
+
+		private void loadChimneyTypeFrame()
+		{
+			//this.ClientSize = new System.Drawing.Size(848, 400);
+			//this.MaximizeBox = false;
+			
+			//this.ChimneyType.Location = new System.Drawing.Point(40, 360);
+			//this.CrossVentilation.Location = new System.Drawing.Point(40, 380);
+
+			//luton type
+
+			//Luton type 0 data 
+			floornumber.Hide();
+			floorlength.Hide();
+			atriumlength.Hide();
+			floorwidth.Hide();
+			floorheight.Hide();
+			roofheight.Hide();
+			sidewindowsize.Hide(); //m2
+			topwindowsize.Hide();
+
+			pictureBox1.Hide();
+			label001.Hide();
+			label002.Hide();
+			label003.Hide();
+			label004.Hide();
+			label005.Hide();
+			label006.Hide();
+			label007.Hide();
+			label008.Hide();
+
+			//Hide the following controls
+			
+			////////////////////Chimney type 1 data
+			//ChimneyType.Hide ();
+			
+			cfloornumber.Show();
+			cfloorlength.Show();
+			catriumlength.Show();
+			cfloorwidth.Show();
+			cfloorheight.Show();
+			croofheight.Show();
+			csidewindowsize.Show(); //m2
+			ctopwindowsize.Show(); //m2	
+			
+			pictureBox2.Show();
+			label021.Show();
+			label022.Show();
+			label023.Show();
+			label024.Show();
+			label025.Show();
+			label026.Show();
+			label027.Show();
+			label028.Show();
+
+			//add on 06/25/2006
+			TopWindowSpaceBut.Show();
+			ChimneyType.Enabled = true;
+			//////////////////////
+
+			//also hide the following data
+			///////////////////////////Cross Ventilation type 2 data
+			//CrossVentilation.Hide ();
+
+			cvsections.Hide();
+			cvfloorlength.Hide();
+			cvfloorwidth.Hide();
+			cvfloorheight.Hide();
+			cvsidewindowsize.Hide();
+			cvinternalwindowsize.Hide();
+
+			pictureBox3.Hide();
+			label041.Hide();
+			label042.Hide();
+			label043.Hide();
+			label044.Hide();
+			label045.Hide();
+			label046.Hide();
+			//////////////////////////
+			///
+			//07/26/2006
+			ssfloorheight.Hide ();
+			ssfloorlength.Hide ();
+			ssfloorwidth.Hide ();
+			
+			pictureBox4.Hide ();
+			label061.Hide ();
+			label062.Hide ();
+			label063.Hide ();
+			label064.Hide ();
+
+			//added on 06/25/2006
+			LutonType.Enabled = false;
+			CrossVentilation.Enabled = false;
+			SingleSided.Enabled = false;
+		}
+
+		private void loadCrossVentilationFrame()
+		{
+			//this.ClientSize = new System.Drawing.Size(848, 400);
+			//this.MaximizeBox = false;
+			
+			//this.ChimneyType.Location = new System.Drawing.Point(40, 360);
+			//this.CrossVentilation.Location = new System.Drawing.Point(40, 380);
+
+			//luton type
+
+			//Luton type 0 data 
+			floornumber.Hide();
+			floorlength.Hide();
+			atriumlength.Hide();
+			floorwidth.Hide();
+			floorheight.Hide();
+			roofheight.Hide();
+			sidewindowsize.Hide(); //m2
+			topwindowsize.Hide();
+
+			pictureBox1.Hide();
+			label001.Hide();
+			label002.Hide();
+			label003.Hide();
+			label004.Hide();
+			label005.Hide();
+			label006.Hide();
+			label007.Hide();
+			label008.Hide();
+
+			//Hide the following controls
+			
+			////////////////////Chimney type 1 data
+			//ChimneyType.Hide ();
+			
+			cfloornumber.Hide();
+			cfloorlength.Hide();
+			catriumlength.Hide();
+			cfloorwidth.Hide();
+			cfloorheight.Hide();
+			croofheight.Hide();
+			csidewindowsize.Hide(); //m2
+			ctopwindowsize.Hide(); //m2	
+			
+			pictureBox2.Hide();
+			label021.Hide();
+			label022.Hide();
+			label023.Hide();
+			label024.Hide();
+			label025.Hide();
+			label026.Hide();
+			label027.Hide();
+			label028.Hide();
+			//add on 06/25/2006
+			TopWindowSpaceBut.Hide();
+			CrossVentilation.Enabled = true;
+			//////////////////////
+
+			//also hide the following data
+			///////////////////////////Cross Ventilation type 2 data
+			//CrossVentilation.Hide ();
+
+			cvsections.Show();
+			cvfloorlength.Show();
+			cvfloorwidth.Show();
+			cvfloorheight.Show();
+			cvsidewindowsize.Show();
+			cvinternalwindowsize.Show();
+
+			pictureBox3.Show();
+			label041.Show();
+			label042.Show();
+			label043.Show();
+			label044.Show();
+			label045.Show();
+			label046.Show();
+			//////////////////////////
+			///
+			//07/26/2006
+			ssfloorheight.Hide ();
+			ssfloorlength.Hide ();
+			ssfloorwidth.Hide ();
+			
+			pictureBox4.Hide ();
+			label061.Hide ();
+			label062.Hide ();
+			label063.Hide ();
+			label064.Hide ();
+
+			//added on 06/25/2006
+			LutonType.Enabled = false;
+			ChimneyType.Enabled = false;
+			SingleSided.Enabled = false;
+		}
+
+		//07/24/2006
+		private void loadSingleSidedFrame()
+		{
+			//this.ClientSize = new System.Drawing.Size(848, 400);
+			//this.MaximizeBox = false;
+			
+			//this.ChimneyType.Location = new System.Drawing.Point(40, 360);
+			//this.CrossVentilation.Location = new System.Drawing.Point(40, 380);
+
+			//luton type
+
+			//Luton type 0 data 
+			floornumber.Hide();
+			floorlength.Hide();
+			atriumlength.Hide();
+			floorwidth.Hide();
+			floorheight.Hide();
+			roofheight.Hide();
+			sidewindowsize.Hide(); //m2
+			topwindowsize.Hide();
+
+			pictureBox1.Hide();
+			label001.Hide();
+			label002.Hide();
+			label003.Hide();
+			label004.Hide();
+			label005.Hide();
+			label006.Hide();
+			label007.Hide();
+			label008.Hide();
+
+			//Hide the following controls
+			
+			////////////////////Chimney type 1 data
+			//ChimneyType.Hide ();
+			
+			cfloornumber.Hide();
+			cfloorlength.Hide();
+			catriumlength.Hide();
+			cfloorwidth.Hide();
+			cfloorheight.Hide();
+			croofheight.Hide();
+			csidewindowsize.Hide(); //m2
+			ctopwindowsize.Hide(); //m2	
+			
+			pictureBox2.Hide();
+			label021.Hide();
+			label022.Hide();
+			label023.Hide();
+			label024.Hide();
+			label025.Hide();
+			label026.Hide();
+			label027.Hide();
+			label028.Hide();
+			//add on 06/25/2006
+			TopWindowSpaceBut.Hide();
+			SingleSided.Enabled = true;
+			//////////////////////
+
+			//also hide the following data
+			///////////////////////////Cross Ventilation type 2 data
+			//CrossVentilation.Hide ();
+			//07/26/2006
+			cvsections.Hide();
+			cvfloorlength.Hide();
+			cvfloorwidth.Hide();
+			cvfloorheight.Hide();
+			cvsidewindowsize.Hide();
+			cvinternalwindowsize.Hide();
+			pictureBox3.Hide();
+			label041.Hide();
+			label042.Hide();
+			label043.Hide();
+			label044.Hide();
+			label045.Hide();
+			label046.Hide();
+			//////////////////////////
+			///
+
+			//07/26/2006
+			ssfloorheight.Show ();
+			ssfloorlength.Show ();
+			ssfloorwidth.Show ();
+			
+			pictureBox4.Show ();
+			label061.Show ();
+			label062.Show ();
+			label063.Show ();
+			label064.Show ();
+
+			//added on 06/25/2006
+			LutonType.Enabled = false;
+			ChimneyType.Enabled = false;
+			CrossVentilation.Enabled = false;
+		}
+
+		private void PolygonForm_Load(object sender, System.EventArgs e)
+		{
+//			//Jinchao Yuan added here an section to input the initial parameters
+//			StartProg StartProgform = new StartProg();
+//			//		LutonVisual visualform = new LutonVisual(this);
+//			//visualform.ShowDialog ();
+//			StartProgform.Show ();
+
+   
+			//add by jinchao yuan 01/23/2006
+			//ChimneyType.Select ();
+			//add by jinchao yuan 01/23/2006
+
+			if(datapackage.bldgtype==0)
+			{
+				LutonType.Select();
+				loadLutonTypeFrame();
+			}
+			else if (datapackage.bldgtype==1)
+			{
+				ChimneyType.Select();
+				loadChimneyTypeFrame();
+			}
+			else if (datapackage.bldgtype==2)
+			{
+				CrossVentilation.Select ();
+				loadCrossVentilationFrame();
+			}
+			else if (datapackage.bldgtype==3) //single sided ventilation
+			{
+				SingleSided.Select ();
+				loadSingleSidedFrame();
+			}
+
+			performedcalulation = false;
+			Visualization.Enabled = false;
+
+			if (datapackage.transimu == 1)
+			{		
+				TMassCheck.Checked = true;
+
+				TMassThick.Enabled = true;
+				TMassArea.Enabled = true;
+				TMassMaterials.Enabled = true;
+
+			}
+			else // if (datapackage.transimu == 0)
+			{
+				TMassCheck.Checked = false;
+				TMassThick.Enabled = false;
+				TMassArea.Enabled = false;
+				TMassMaterials.Enabled = false;
+			}
+
+			//TMassMaterials.Items.Clear();
+			TMassMaterials.Items.Add ("Concrete");
+			TMassMaterials.Items.Add ("Brick");
+			TMassMaterials.Items.Add ("Steel");
+			TMassMaterials.SelectedIndex = 0;
+
+			FloorTypeCom.Items.Add ("Exposed");
+			FloorTypeCom.Items.Add ("Carpeted");
+			FloorTypeCom.Items.Add ("Raised");
+			FloorTypeCom.SelectedIndex = 0;
+
+			CeilingTypeCom.Items.Add ("Exposed");
+			CeilingTypeCom.Items.Add ("Suspended");
+			CeilingTypeCom.SelectedIndex = 0;
+
+			closewindowOAChe.Checked = true;
+			closewindowIAChe.Checked = true; // Jinchao Yuan modi on 01/24/2007
+			//closewindowIAChe.Checked = false; //01/24/2007 modo to above
+
+			IALimitTxt.Enabled = true; // Jinchao Yuan modi on 01/24/2007
+			//IALimitTxt.Enabled = false; //01/24/2007 modo to above
+		}
+
+		private void CancelAction_Click(object sender, System.EventArgs e)
+		{
+			this.Close();
+
+			Application.Exit ();
+		}
+
+		private void LutonType_CheckedChanged(object sender, System.EventArgs e)
+		{
+			if(LutonType.Checked)
+			{
+				datapackage.bldgtype = 0;
+				loadLutonTypeFrame();
+			}
+		
+		}
+
+		private void ChimneyType_CheckedChanged(object sender, System.EventArgs e)
+		{
+			if(ChimneyType.Checked)
+			{
+				datapackage.bldgtype = 1;
+				loadChimneyTypeFrame();
+			}
+		}
+
+		private void CrossVentilation_CheckedChanged(object sender, System.EventArgs e)
+		{
+			if(CrossVentilation.Checked)
+			{
+				datapackage.bldgtype = 2;
+				loadSingleSidedFrame();
+			}
+		}
+
+		private void SingleSided_CheckedChanged(object sender, System.EventArgs e)
+		{
+			if(SingleSided.Checked)
+			{
+				datapackage.bldgtype = 3;
+				loadCrossVentilationFrame();
+			}
+		}
+
+		private void Back_Click(object sender, System.EventArgs e)
+		{
+			//Jinchao Yuan added here an section to input the initial parameters
+			StartProg StartProgform = new StartProg();
+			//visualform.ShowDialog ();
+			StartProgform.ShowDialog ();
+
+			//copmletely copied from Load section
+			if(datapackage.bldgtype==0)
+			{
+				LutonType.Select();
+				loadLutonTypeFrame();
+			}
+			else if (datapackage.bldgtype==1)
+			{
+				ChimneyType.Select();
+				loadChimneyTypeFrame();
+			}
+			else if (datapackage.bldgtype==2)
+			{
+				CrossVentilation.Select ();
+				loadCrossVentilationFrame();
+			}
+			else //if (datapackage.bldgtype ==3)
+			{
+				SingleSided.Select ();
+				loadSingleSidedFrame();
+			}
+
+			performedcalulation = false;
+			Visualization.Enabled = false;
+
+			if (datapackage.transimu == 1)
+			{		
+				TMassCheck.Checked = true;
+
+				TMassThick.Enabled = true;
+				TMassArea.Enabled = true;
+				TMassMaterials.Enabled = true;
+
+			}
+			else // if (datapackage.transimu == 0)
+			{
+				TMassCheck.Checked = false;
+				TMassThick.Enabled = false;
+				TMassArea.Enabled = false;
+				TMassMaterials.Enabled = false;
+			}
+
+			//added on 06/27/2006
+			TMassMaterials.Items.Clear();
+			
+			TMassMaterials.Items.Add ("Concrete");
+			TMassMaterials.Items.Add ("Brick");
+			TMassMaterials.Items.Add ("Steel");
+			TMassMaterials.SelectedIndex = 0;
+		}
+
+		private void TMassCheck_CheckedChanged(object sender, System.EventArgs e)
+		{
+			if (TMassCheck.Checked ==true)
+			{
+				TMassThick.Enabled = true;
+				TMassArea.Enabled = true;
+				TMassMaterials.Enabled = true;
+				
+				//07/20/206
+				CeilingTypeCom.Enabled = true;
+				FloorTypeCom.Enabled = true;
+			}
+			else 
+			{
+				TMassThick.Enabled = false;
+				TMassArea.Enabled = false;
+				TMassMaterials.Enabled = false;
+
+				//07/20/206
+				CeilingTypeCom.Enabled = false;
+				FloorTypeCom.Enabled = false;
+			}
+		}
+
+		private void SideWindowSpace_Click(object sender, System.EventArgs e)
+		{
+			WindowSpacingDlg windowspaceform = new WindowSpacingDlg();
+			windowspaceform.ShowDialog ();
+
+			if (globalcontrol.sidewindowspaceupdateflag == true)
+			{
+				if (datapackage.bldgtype ==0)
+				{
+					sidewindowsize.Text = datapackage.sidewindowsize.ToString () ;
+				}
+				else if (datapackage.bldgtype ==1)
+				{
+					csidewindowsize.Text = datapackage.csidewindowsize.ToString () ;
+				}
+				else if (datapackage.bldgtype ==2)
+				{
+					cvsidewindowsize.Text = datapackage.cvsidewindowsize.ToString () ;
+				}
+				else //if (datapackage.bldgtype ==3)
+				{
+					
+				}
+			}
+
+		}
+
+		private void TopWindowSpaceBut_Click(object sender, System.EventArgs e)
+		{
+			TopWindowSpace topwindowform = new TopWindowSpace();
+			topwindowform.ShowDialog ();
+
+			if (globalcontrol.topwindowspaceupdateflag == true)
+			{
+				if (datapackage.bldgtype ==0)
+				{
+					topwindowsize.Text = datapackage.topwindowsize.ToString () ;
+				}
+				else if (datapackage.bldgtype ==1)
+				{
+					ctopwindowsize.Text = datapackage.ctopwindowsize.ToString () ;
+				}
+				// else // if (datapackage.bldgtype ==2)
+				// {
+				// 	//cvsidewindowsize.Text = datapackage.cvsidewindowsize.ToString () ;
+				//}
+			}
+		}
+
+		private void PerformCalBut_Click(object sender, System.EventArgs e)
+		{
+			//update datapackage data
+			this.updatedatapackage ();
+
+			//			//update the datapackage data
+			//			datapackage.ambienttemperature = Double.Parse (ambienttemperature.Text);
+			//			datapackage.terraininAlp = Double.Parse (terraininAlp.Text);
+			//			datapackage.circumBuildingH = Double.Parse (circumBuildingH.Text);
+			//			datapackage.windvelocity = Double.Parse (windvelocity.Text);
+			//			datapackage.windDirect = Double.Parse (windDirect.Text);
+			//			datapackage.dis_W_E = Double.Parse (dis_W_E.Text);
+			//			datapackage.dis_N_S = Double.Parse (dis_N_S.Text);
+			//			datapackage.buildingHeight = Double.Parse (buildingHeight.Text);
+
+			this.WriteInputFile();
+
+			//Declare and instantiate a new process component.
+			System.Diagnostics.Process calProcess;
+			calProcess = new System.Diagnostics.Process();
+
+			//Do not receive an event when the process exits.
+			calProcess.EnableRaisingEvents = false;
+
+			//The "/C" Tells Windows to Run The Command then Terminate 
+			//string strCmdLine = "java InputRead";
+			//		strCmdLine = "/C regenresx "+textBox1.Text + " " +textBox2.Text;
+			//		System.Diagnostics.Process.Start("CMD.exe",strCmdLine);
+			
+			//modified on 06/29/2006
+			//System.Diagnostics.Process.Start("java", "InputRead");
+			System.Diagnostics.Process.Start("Core");
+
+			//		process1.WaitForInputIdle();
+			calProcess.Close();
+
+			performedcalulation = true;
+			Visualization.Enabled = true;
+			/*		if ( output != null)
+			{
+				try 
+				{
+					output.Close ();
+				}
+				catch (IOException)
+				{
+					MessageBox.Show ("Cannot close file", "Error", MessageBoxButtons.OK , MessageBoxIcon.Error);
+				}
+			}
+			*/
+		}
+
+		private void Visualization_Click(object sender, System.EventArgs e)
+		{
+			this.updatedatapackage ();
+			LutonVisual visualform = new LutonVisual();
+			//		LutonVisual visualform = new LutonVisual(this);
+
+			//visualform.ShowDialog ();
+			visualform.Show ();
+		}
+
+		private void updatedatapackage()
+		{
+			//update the datapackage data
+			//			datapackage.ambienttemperature = Double.Parse (ambienttemperature.Text);
+			//			datapackage.terraininAlp = Double.Parse (terraininAlp.Text);
+			//			datapackage.circumBuildingH = Double.Parse (circumBuildingH.Text);
+			//			datapackage.windvelocity = Double.Parse (windvelocity.Text);
+			//			datapackage.windDirect = Double.Parse (windDirect.Text);
+			//			datapackage.dis_W_E = Double.Parse (dis_W_E.Text);
+			//			datapackage.dis_N_S = Double.Parse (dis_N_S.Text);
+			//			datapackage.buildingHeight = Double.Parse (buildingHeight.Text);
+
+			if ( LutonType.Checked )
+			{
+				//luton type
+
+				//Update the data package
+				//building type
+				datapackage.bldgtype = 0;
+				//Luton type 0 data 
+				datapackage.floornumber = Int32.Parse (floornumber.Text);
+				datapackage.floorlength = Double.Parse (floorlength.Text);
+				datapackage.atriumlength = Double.Parse(atriumlength.Text);
+	    	
+				datapackage.floorwidth = Double.Parse (floorwidth.Text);
+				datapackage.floorheight = Double.Parse (floorheight.Text);
+				datapackage.roofheight = Double.Parse (roofheight.Text);
+	    	
+				datapackage.sidewindowsize = Double.Parse (sidewindowsize.Text); //m2
+				datapackage.topwindowsize = Double.Parse (topwindowsize.Text); //m2
+
+				//calculate the buildign dimentions // 06/22/2006
+				datapackage.dis_N_S = datapackage.floorwidth;
+				datapackage.dis_W_E = 2* datapackage.floorlength + datapackage.atriumlength;
+				datapackage.buildingHeight = datapackage.floornumber * datapackage.floorheight + datapackage.roofheight;
+			}
+			else if ( ChimneyType.Checked )
+			{
+				// chimney type
+				datapackage.bldgtype = 1;
+
+				//Chimney type 1 data
+				datapackage.cfloornumber = Int32.Parse (cfloornumber.Text);
+				datapackage.cfloorlength = Double.Parse (cfloorlength.Text);
+				datapackage.catriumlength = Double.Parse(catriumlength.Text);
+	    	
+				datapackage.cfloorwidth = Double.Parse (cfloorwidth.Text);
+				datapackage.cfloorheight = Double.Parse (cfloorheight.Text);
+				datapackage.croofheight = Double.Parse (croofheight.Text);
+	    	
+				datapackage.csidewindowsize = Double.Parse (csidewindowsize.Text); //m2
+				datapackage.ctopwindowsize = Double.Parse (ctopwindowsize.Text); //m2	
+
+				//calculate the buildign dimentions // 06/22/2006
+				datapackage.dis_N_S = datapackage.cfloorwidth;
+				datapackage.dis_W_E = datapackage.cfloorlength + datapackage.catriumlength;
+				datapackage.buildingHeight = datapackage.cfloornumber * datapackage.cfloorheight + datapackage.croofheight;
+			}
+			else if ( CrossVentilation.Checked )
+			{
+				// the crossventilation type
+				datapackage.bldgtype = 2;
+				//Cross Ventilation type 2 data
+				datapackage.cvsections = Int32.Parse(cvsections.Text);
+				datapackage.cvfloorlength = Double.Parse (cvfloorlength.Text);
+				datapackage.cvfloorwidth = Double.Parse(cvfloorwidth.Text);
+				datapackage.cvfloorheight = Double.Parse(cvfloorheight.Text);
+				datapackage.cvsidewindowsize = Double.Parse(cvsidewindowsize.Text);
+				datapackage.cvinternalwindowsize = Double.Parse(cvinternalwindowsize.Text);
+
+				//calculate the buildign dimentions // 06/22/2006
+				datapackage.dis_N_S = 10;//datapackage.cvfloorlength * datapackage.cvsections;
+				datapackage.dis_W_E = 5; //datapackage.cvfloorwidth;
+				datapackage.buildingHeight = 5; //datapackage.cvfloorheight;
+			}
+			else  if (SingleSided.Checked)
+			{
+				// the crossventilation type
+				datapackage.bldgtype = 3;
+				//Single Sided type 3 data
+				datapackage.ssfloorlength = Double.Parse (ssfloorlength.Text);
+				datapackage.ssfloorwidth = Double.Parse(ssfloorwidth.Text);
+				datapackage.ssfloorheight = Double.Parse(ssfloorheight.Text);
+				datapackage.sslowerwindowheight = globalcontrol.LowerHeight ;
+				datapackage.sslowerwindowsize = globalcontrol.LowerArea * globalcontrol.NumofWindows;
+				datapackage.ssupperwindowheight  = globalcontrol.UpperHeight ;
+				datapackage.ssupperwindowsize = globalcontrol.UpperArea * globalcontrol.NumofWindows;
+
+				//calculate the buildign dimentions // 06/22/2006
+				datapackage.dis_N_S = datapackage.ssfloorlength;
+				datapackage.dis_W_E = datapackage.ssfloorwidth;
+				datapackage.buildingHeight = datapackage.ssfloorheight;
+			}
+
+			//			datapackage.initialzonetemperature = Double.Parse (initialzonetemperature.Text);
+			//			datapackage.heatsource = Double.Parse (heatsource.Text);
+
+			if (TMassCheck.Checked == true && datapackage.transimu == 1)	
+				datapackage.TMassCheck = 1;
+			else // (TMassCheck.Checked == false)
+				datapackage.TMassCheck = 0;
+
+			datapackage.TMassThick = Double.Parse(TMassThick.Text)/100.0;
+			datapackage.TMassArea = Double.Parse(TMassArea.Text)/100.0;
+			
+			if (TMassMaterials.SelectedIndex == 0)
+			{
+				datapackage.TMassk = 1.0;
+			}
+			else if (TMassMaterials.SelectedIndex == 1)
+			{
+				datapackage.TMassk = 0.3;
+			}
+			else //if (TMassMaterials.SelectedIndex == 2)
+			{
+				datapackage.TMassk = 170;
+			}
+
+			//07/04/2006
+			if (FloorTypeCom.SelectedIndex == 0) // exposed floor
+				datapackage.hfloor = 10.0;
+			else if (FloorTypeCom.SelectedIndex == 1) // carpted floor
+				datapackage.hfloor = 5.0;
+			else // if (FloorTypeCom.SelectedIndex == 2) //raised floor
+				datapackage.hfloor = 2.5;
+
+			//07/04/2006
+			if (CeilingTypeCom.SelectedIndex == 0) // exposed ceiling
+				datapackage.hceiling = 10.0;
+			else // if (CeilingTypeCom.SelectedIndex == 1) // air gap ceiling
+				datapackage.hceiling = 3.0;
+
+			//07/20/2006
+			if (closewindowOAChe.Checked == true) //&& datapackage.transimu == 1)	
+			{
+				datapackage.closewindowOACheck = 1;
+			}
+			else 
+			{
+				datapackage.closewindowOACheck = 0;
+			}
+			datapackage.OALimit = Double.Parse (OALimitTxt.Text);
+
+			//07/20/2006
+			if (closewindowIAChe.Checked == true) //&& datapackage.transimu == 1)	
+			{
+				datapackage.closewindowIACheck = 1;
+			}
+			else 
+			{
+				datapackage.closewindowIACheck = 0;
+			}
+			datapackage.IALimit = Double.Parse (IALimitTxt.Text);
+
+		}
+
+		private void WriteInputFile()
+		{
+			//string fileName = "Input.txt";
+			TextWriter tw = new StreamWriter("Input.txt");
+
+			//FileStream output = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write );
+			//StreamWriter bufferoutput = new BufferedStreamWriter(output);
+
+			//			tw.WriteLine (Double.Parse (ambienttemperature.Text));
+			//			tw.WriteLine (Double.Parse (terraininAlp.Text));
+			//			tw.WriteLine (Double.Parse (circumBuildingH.Text));
+			//			tw.WriteLine (Double.Parse (windvelocity.Text));
+			//			tw.WriteLine (Double.Parse (windDirect.Text));
+			//			tw.WriteLine (Double.Parse (dis_W_E.Text));
+			//			tw.WriteLine (Double.Parse (dis_N_S.Text));
+			//			tw.WriteLine (Double.Parse (buildingHeight.Text));
+
+			tw.WriteLine (datapackage.ambienttemperature);
+			tw.WriteLine (datapackage.terraininAlp);
+			tw.WriteLine (datapackage.circumBuildingH);
+			tw.WriteLine (datapackage.windvelocity);
+			tw.WriteLine (datapackage.bldgOrientation);
+			tw.WriteLine (datapackage.windDirect);
+			tw.WriteLine (datapackage.dis_W_E);
+			tw.WriteLine (datapackage.dis_N_S);
+			tw.WriteLine (datapackage.buildingHeight);
+
+			/*
+			if(fileName =="" || fileName == null)
+			{
+				MessageBox.Show("Invalide FileName", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			else
+			{
+				try
+				{
+					output = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write );
+				}
+				catch (FileNotFoundException)
+				{
+					MessageBox.Show("File Does not Exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
+			*/
+
+			if ( LutonType.Checked )
+			{
+				//luton type
+
+				//				//Update the data package
+				//				//building type
+				//				datapackage.bldgtype = 0;
+				//				//Luton type 0 data 
+				//				datapackage.floornumber = Int32.Parse (floornumber.Text);
+				//				datapackage.floorlength = Double.Parse (floorlength.Text);
+				//				datapackage.atriumlength = Double.Parse(atriumlength.Text);
+				//	    	
+				//				datapackage.floorwidth = Double.Parse (floorwidth.Text);
+				//				datapackage.floorheight = Double.Parse (floorheight.Text);
+				//				datapackage.roofheight = Double.Parse (roofheight.Text);
+				//	    	
+				//				datapackage.sidewindowsize = Double.Parse (sidewindowsize.Text); //m2
+				//				datapackage.topwindowsize = Double.Parse (topwindowsize.Text); //m2
+
+				//				//write zone type in building
+				//				tw.WriteLine (0);
+				//				tw.WriteLine (Int32.Parse (floornumber.Text));
+				//				tw.WriteLine (Double.Parse (floorlength.Text));
+				//				tw.WriteLine (Double.Parse(atriumlength.Text));
+				//				tw.WriteLine (Double.Parse (floorwidth.Text));
+				//				tw.WriteLine (Double.Parse (floorheight.Text));
+				//				tw.WriteLine (Double.Parse (roofheight.Text));
+				//				tw.WriteLine (Double.Parse (sidewindowsize.Text));
+				//				tw.WriteLine (Double.Parse (topwindowsize.Text));
+
+				//write zone type in building
+				tw.WriteLine (datapackage.bldgtype );
+				tw.WriteLine (datapackage.floornumber);
+				tw.WriteLine (datapackage.floorlength);
+				tw.WriteLine (datapackage.atriumlength);
+				tw.WriteLine (datapackage.floorwidth);
+				tw.WriteLine (datapackage.floorheight);
+				tw.WriteLine (datapackage.roofheight);
+				tw.WriteLine (datapackage.sidewindowsize);
+				tw.WriteLine (datapackage.topwindowsize);
+			}
+
+			else if ( ChimneyType.Checked )
+			{
+				//				// chimney type
+				//				datapackage.bldgtype = 1;
+				//
+				//				//Chimney type 1 data
+				//				datapackage.cfloornumber = Int32.Parse (cfloornumber.Text);
+				//				datapackage.cfloorlength = Double.Parse (cfloorlength.Text);
+				//				datapackage.catriumlength = Double.Parse(catriumlength.Text);
+				//	    	
+				//				datapackage.cfloorwidth = Double.Parse (cfloorwidth.Text);
+				//				datapackage.cfloorheight = Double.Parse (cfloorheight.Text);
+				//				datapackage.croofheight = Double.Parse (croofheight.Text);
+				//	    	
+				//				datapackage.csidewindowsize = Double.Parse (csidewindowsize.Text); //m2
+				//				datapackage.ctopwindowsize = Double.Parse (ctopwindowsize.Text); //m2	
+
+				//				//bufferoutput.
+				//				tw.WriteLine (1);
+				//				tw.WriteLine (Int32.Parse (cfloornumber.Text));
+				//				tw.WriteLine (Double.Parse (cfloorlength.Text));
+				//				tw.WriteLine (Double.Parse(catriumlength.Text));
+				//				tw.WriteLine (Double.Parse (cfloorwidth.Text));
+				//				tw.WriteLine (Double.Parse (cfloorheight.Text));
+				//				tw.WriteLine (Double.Parse (croofheight.Text));
+				//				tw.WriteLine (Double.Parse (csidewindowsize.Text));
+				//				tw.WriteLine (Double.Parse (ctopwindowsize.Text));
+
+				tw.WriteLine (datapackage.bldgtype);
+				tw.WriteLine (datapackage.cfloornumber);
+				tw.WriteLine (datapackage.cfloorlength);
+				tw.WriteLine (datapackage.catriumlength);
+				tw.WriteLine (datapackage.cfloorwidth);
+				tw.WriteLine (datapackage.cfloorheight);
+				tw.WriteLine (datapackage.croofheight);
+				tw.WriteLine (datapackage.csidewindowsize);
+				tw.WriteLine (datapackage.ctopwindowsize);
+			}
+
+			else if ( CrossVentilation.Checked )
+			{
+				// the crossventilation type
+
+				//				datapackage.bldgtype = 2;
+				//				//Cross Ventilation type 2 data
+				//				datapackage.cvsections = Int32.Parse(cvsections.Text);
+				//				datapackage.cvfloorlength = Double.Parse (cvfloorlength.Text);
+				//				datapackage.cvfloorwidth = Double.Parse(cvfloorwidth.Text);
+				//				datapackage.cvfloorheight = Double.Parse(cvfloorheight.Text);
+				//				datapackage.cvsidewindowsize = Double.Parse(cvsidewindowsize.Text);
+				//				datapackage.cvinternalwindowsize = Double.Parse(cvinternalwindowsize.Text);
+
+				//				//cross ventliation type data
+				//				//group 2
+				//				tw.WriteLine (2);
+				//				tw.WriteLine (Int32.Parse(cvsections.Text));
+				//				tw.WriteLine (Double.Parse (cvfloorlength.Text));
+				//				tw.WriteLine (Double.Parse(cvfloorwidth.Text));
+				//				tw.WriteLine (Double.Parse(cvfloorheight.Text));
+				//				tw.WriteLine (Double.Parse(cvsidewindowsize.Text));
+				//				tw.WriteLine (Double.Parse(cvinternalwindowsize.Text));
+
+				//cross ventliation type data
+				//group 2
+				tw.WriteLine (datapackage.bldgtype);
+				tw.WriteLine (datapackage.cvsections);
+				tw.WriteLine (datapackage.cvfloorlength);
+				tw.WriteLine (datapackage.cvfloorwidth);
+				tw.WriteLine (datapackage.cvfloorheight);
+				tw.WriteLine (datapackage.cvsidewindowsize);
+				tw.WriteLine (datapackage.cvinternalwindowsize);
+			}	
+			
+			else //if (SingleSided.Checked)
+			{
+				//single sided type data
+				//group 3
+				tw.WriteLine (datapackage.bldgtype);
+				tw.WriteLine (datapackage.ssfloorlength);
+				tw.WriteLine (datapackage.ssfloorwidth);
+				tw.WriteLine (datapackage.ssfloorheight);
+
+				tw.WriteLine (datapackage.sslowerwindowheight );
+				tw.WriteLine (datapackage.sslowerwindowsize);
+				tw.WriteLine (datapackage.ssupperwindowheight );
+				tw.WriteLine (datapackage.ssupperwindowsize);
+			}
+
+			//			datapackage.initialzonetemperature = Double.Parse (initialzonetemperature.Text);
+			//			datapackage.heatsource = Double.Parse (heatsource.Text);
+
+			//			tw.WriteLine (Double.Parse (initialzonetemperature.Text));
+			//			tw.WriteLine (Double.Parse (heatsource.Text));
+
+			tw.WriteLine (datapackage.initialzonetemperature);
+			tw.WriteLine (datapackage.heatsource);
+
+			//add on 06/19/2006
+			tw.WriteLine (datapackage.TMassCheck);
+			
+			//add on 06/18/2006
+			tw.WriteLine (datapackage.TMassThick);
+			tw.WriteLine (datapackage.TMassArea );
+			tw.WriteLine (datapackage.TMassk );
+
+			//add on 06/04/2006
+			tw.WriteLine (datapackage.transimu );
+			tw.WriteLine (datapackage.cityname );
+			tw.WriteLine (datapackage.month);
+
+			tw.WriteLine (datapackage.hfloor);
+			tw.WriteLine (datapackage.hceiling);
+
+			//add on 07/20/2006
+			tw.WriteLine (datapackage.closewindowOACheck );
+			tw.WriteLine (datapackage.OALimit );
+
+			tw.WriteLine (datapackage.closewindowIACheck );
+			tw.WriteLine (datapackage.IALimit );
+
+			// close file
+			tw.Close();
+		}
+
+		private void ReportRsltBut_Click(object sender, System.EventArgs e)
+		{
+			//07/06/2006
+
+		}
+
+		private void closewindowOAChe_CheckedChanged(object sender, System.EventArgs e)
+		{
+			if (closewindowOAChe.Checked == true)
+				OALimitTxt.Enabled = true;
+			else 
+				OALimitTxt.Enabled = false;
+		}
+
+		private void closewindowIAChe_CheckedChanged(object sender, System.EventArgs e)
+		{
+			if (closewindowIAChe.Checked == true)
+				IALimitTxt.Enabled = true;
+			else 
+				IALimitTxt.Enabled = false;
+		}
+
+
+
+	} // end class PolygonForm
+
+
+	//Jinchao Yuan added this data package inside
+	public class datapackage
+	{
+		//data for weather data and basic building information
+		public static double ambienttemperature = 20;
+		public static double terraininAlp = 0.18;
+		public static double circumBuildingH = 5;
+		public static double windvelocity = 2.0;
+		public static double bldgOrientation = 0.0;
+		public static double windDirect = 270.0;
+		public static double dis_W_E = 5.0;
+		public static double dis_N_S = 10.0;
+		public static double buildingHeight = 3*3.0+3.0;
+
+		//building type
+		public static int bldgtype = 1;
+
+		//Luton type 0 data 
+		public static int floornumber = 3;
+		public static double floorlength = 10.0;
+		public static double atriumlength = 5.0;
+	    	
+		public static double floorwidth = 10.0;
+		public static double floorheight = 3.0;
+		public static double roofheight = 3.0;
+	    	
+		public static double sidewindowsize = 1.0; //m2
+		public static double topwindowsize = 2.0; //m2
+
+		//Chimney type 1 data
+		public static int cfloornumber = 4;
+		public static double cfloorlength = 10.0;
+		public static double catriumlength = 5.0;
+	    	
+		public static double cfloorwidth = 10.0;
+		public static double cfloorheight = 3.0;
+		public static double croofheight = 3.0;
+	    	
+		public static double csidewindowsize = 1.0; //m2
+		public static double ctopwindowsize = 2.0; //m2	
+   
+		//Cross Ventilation type 2 data
+		public static int cvsections = 3;
+		public static double cvfloorlength = 10.0;
+		public static double cvfloorwidth = 10.0;
+		public static double cvfloorheight = 5.0;
+		public static double cvsidewindowsize = 2.0;
+		public static double cvinternalwindowsize = 1.5;
+
+		//07/24/2006
+		//Single Sided type 3 data
+		public static double ssfloorlength = 10.0;
+		public static double ssfloorwidth = 10.0;
+		public static double ssfloorheight = 5.0;
+		public static double sslowerwindowheight = 0.5;
+		public static double sslowerwindowsize = 1.2;
+		public static double ssupperwindowheight = 2.5;
+		public static double ssupperwindowsize = 0.6;
+
+		//general intitial temperature and heat source description
+		public static double initialzonetemperature = 22.0;
+		public static double heatsource = 30.0;
+
+		public static int transimu = 1;
+		public static string cityname = "Boston";
+		public static int month = 6;
+
+		public static int TMassCheck = 1;
+
+		public static double TMassThick = 1;
+		public static double TMassArea = 1;
+		public static double TMassk = 1;
+
+		public static double hfloor = 10;
+		public static double hceiling = 10;
+
+		public static int closewindowOACheck = 1;
+		public static int closewindowIACheck = 0;
+
+		public static double OALimit = 12;
+		public static double IALimit = 15;
+
+		//public static bool sidewindowspaceupdateflag = false;
+		//public static bool topwindowspaceupdateflag = false;
+	}
+}
+

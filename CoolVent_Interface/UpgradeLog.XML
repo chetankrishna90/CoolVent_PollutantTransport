@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="CoolVent">
+</Property><Property Name="Solution File" Value="C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\CoolVent.sln">
+</Property><Property Name="User Options File" Value="C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\CoolVent.suo">
+</Property><Property Name="Date" Value="Monday, September 17, 2007">
+</Property><Property Name="Time" Value="16:19 PM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="CoolVent.sln" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\CoolVent.sln">
+</Event><Event ErrorLevel="0" Project="" Source="CoolVent.suo" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\CoolVent.suo">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="CoolVent.csproj" Description="Project file successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\CoolVent.csproj">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="CoolVent.csproj.user" Description="Project user file successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\CoolVent.csproj.user">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="AssemblyInfo.cs" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="CoolVent.cs" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\CoolVent.cs">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="graphControl.cs" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\graphControl.cs">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="PlotT.cs" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\PlotT.cs">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="Schedule.cs" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\Schedule.cs">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="StartProg.cs" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\StartProg.cs">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="TopWindowSpace.cs" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\TopWindowSpace.cs">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="Visualization.cs" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\Visualization.cs">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="WindowSpace.cs" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\WindowSpace.cs">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="App.ico" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\App.ico">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="CoolVent.resx" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\CoolVent.resx">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="graphControl.resx" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\graphControl.resx">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="PlotT.resx" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\PlotT.resx">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="Schedule.resx" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\Schedule.resx">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="StartProg.resx" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\StartProg.resx">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="TopWindowSpace.resx" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\TopWindowSpace.resx">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="Visualization.resx" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\Visualization.resx">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="WindowSpace.resx" Description="File successfully backed up as C:\Documents and Settings\Cuqui\My Documents\AResearch\CoolVent\CoolVentSoftware\Alejandra\CoolVent_Interface\Backup\WindowSpace.resx">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="CoolVent.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CoolVent" Source="CoolVent.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="CoolVent.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="CoolVent.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CoolVent" Source="CoolVent.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
